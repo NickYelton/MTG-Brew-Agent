@@ -1,23 +1,21 @@
-# 🧪 MTG Brew Assistant
+# MTG Brew Assistant
 
-> Opinionated Commander deck-building advice powered by FastAPI, PostgreSQL, and an LLM layer via OpenRouter.
-
-EDHRec tells you what's popular. MTG Brew Assistant tells you *why* a card belongs in your deck — and builds you a coherent gameplan around your commander.
+A Commander deck-building tool that generates opinionated, strategy-driven card recommendations powered by an LLM layer. Unlike popularity-based tools, MTG Brew Assistant builds a coherent gameplan around your commander and explains *why* each card earns its slot.
 
 ---
 
-## ✨ Features
+## Features
 
-- **Commander-driven brewing** — input a commander, receive a full gameplan with categorized card suggestions
-- **Reasoned recommendations** — every card comes with a concise explanation of why it fits the strategy
-- **On-demand deep reasoning** — click any card for an in-depth analysis of its role in the deck
-- **Conversational refinement** — follow up with natural language to adjust the brew ("make it more aggressive", "add more interaction")
+- **Commander-driven brewing** — input a commander and receive a full gameplan with categorized card suggestions
+- **Reasoned recommendations** — every card includes a concise explanation of its role in the strategy
+- **On-demand deep analysis** — request an in-depth breakdown of any individual card's contribution to the deck
+- **Conversational refinement** — follow up in natural language to adjust the brew ("make it more aggressive", "add more interaction")
 - **Image input** — upload a photo or screenshot of a card instead of typing the name
-- **Brew history** — save and revisit past brews, track commander preferences over time
+- **Brew history** — save and revisit past brews, track preferences across commanders
 
 ---
 
-## 🛠️ Tech Stack
+## Tech Stack
 
 | Layer | Technology |
 |---|---|
@@ -31,7 +29,7 @@ EDHRec tells you what's popular. MTG Brew Assistant tells you *why* a card belon
 
 ---
 
-## 🏗️ Project Structure
+## Project Structure
 
 ```
 mtg_brew_assistant/
@@ -42,7 +40,7 @@ mtg_brew_assistant/
 │   │   ├── db/         # Database session management
 │   │   └── models/     # SQLAlchemy models
 │   └── tests/          # pytest test suite
-├── frontend/           # Svelte SPA (scaffolded in Phase 3)
+├── frontend/           # Svelte SPA (via Vite)
 ├── .python-version
 ├── pyproject.toml
 └── README.md
@@ -50,13 +48,13 @@ mtg_brew_assistant/
 
 ---
 
-## 🚀 Getting Started
+## Getting Started
 
 ### Prerequisites
 
 - Python 3.12+
-- [uv](https://docs.astral.sh/uv/) — fast Python package manager
-- PostgreSQL (local instance or Docker)
+- [uv](https://docs.astral.sh/uv/)
+- PostgreSQL
 - An [OpenRouter](https://openrouter.ai/) API key
 
 ### Installation
@@ -69,14 +67,13 @@ cd mtg-brew-assistant
 # Install dependencies
 uv sync
 
-# Copy environment variables
+# Copy and configure environment variables
 cp .env.example .env
-# Fill in your values in .env
 ```
 
 ### Environment Variables
 
-```
+```env
 DATABASE_URL=postgresql://user:password@localhost:5432/mtg_brew
 OPENROUTER_API_KEY=your_openrouter_api_key
 ```
@@ -95,45 +92,39 @@ uv run pytest backend/tests/
 
 ---
 
-## 🗄️ Database
+## Database Migrations
 
-This project uses Alembic for database migrations.
+This project uses Alembic for schema migrations.
 
 ```bash
-# Run migrations
+# Apply all migrations
 uv run alembic upgrade head
 
-# Create a new migration
+# Generate a new migration
 uv run alembic revision --autogenerate -m "description"
 ```
 
-On first run, the Scryfall bulk data seed script will populate the `cards` table.
+On first run, a seed script populates the `cards` table from Scryfall's bulk data export.
 
 ---
 
-## 🧪 Development Approach
+## Roadmap
 
-This project follows a **TDD (Test-Driven Development)** workflow throughout:
-
-1. Write a failing test that describes the desired behaviour (**Red**)
-2. Write the minimum code to make it pass (**Green**)
-3. Refactor for clarity and quality (**Refactor**)
-
-Development is broken into six phases, from foundation and core brew engine through to frontend, persistence, deep reasoning, and eventual multi-user support.
-
----
-
-## 🗺️ Roadmap
-
-- [x] Phase 1 — Project setup, DB schema, Scryfall bulk seed
+- [x] Phase 1 — Project setup, database schema, Scryfall bulk seed
 - [ ] Phase 2 — Core brew engine (Scryfall query builder + LLM integration)
 - [ ] Phase 3 — Svelte frontend + chat interface
 - [ ] Phase 4 — Brew saving, history, and preferences
 - [ ] Phase 5 — On-demand deep card reasoning
-- [ ] Phase 6 — Multi-user auth
+- [ ] Phase 6 — Multi-user support
 
 ---
 
-## 📄 License
+## Contributing
+
+Contributions are welcome. Please open an issue before submitting a pull request to discuss the proposed change.
+
+---
+
+## License
 
 MIT
