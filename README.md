@@ -54,7 +54,7 @@ mtg_brew_assistant/
 
 - Python 3.12+
 - [uv](https://docs.astral.sh/uv/)
-- PostgreSQL
+- [Docker](https://www.docker.com/) (for running PostgreSQL locally)
 - An [OpenRouter](https://openrouter.ai/) API key
 
 ### Installation
@@ -76,6 +76,14 @@ cp .env.example .env
 ```env
 DATABASE_URL=postgresql://user:password@localhost:5432/mtg_brew
 OPENROUTER_API_KEY=your_openrouter_api_key
+```
+
+The `DATABASE_URL` credentials must match the values defined in `docker-compose.yml`.
+
+### Starting the Database
+
+```bash
+docker compose up -d
 ```
 
 ### Running the Backend

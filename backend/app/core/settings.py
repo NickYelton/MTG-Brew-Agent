@@ -1,13 +1,19 @@
 from functools import lru_cache
+from pathlib import Path
 
 from pydantic_settings import BaseSettings, SettingsConfigDict
-from pydantic import Field
+
 
 class Settings(BaseSettings):
-    open_router_key: str = Field(validation_alias="OPENROUTER_API_KEY")
-    database_url: str = Field(validation_alias="DATABASE_URL")
-    model_config = SettingsConfigDict(env_file=".env")
+    model_config = SettingsConfigDict(
+        env_file=Path(__file__).resolve().parents[3] / ".env",
+        extra="ignore"
+    )
+
+    database_url: str
+    openrouter_api_key: str
+
 
 @lru_cache()
-def get_settings():
+def get_settings() -> Settings:
     return Settings()
