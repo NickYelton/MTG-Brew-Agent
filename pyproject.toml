@@ -1,7 +1,7 @@
 [project]
 name = "mtg-brew-assistant"
 version = "0.1.0"
-description = "Add your description here"
+description = "An app that builds MTG decks via API calls and DB reads."
 readme = "README.md"
 requires-python = ">=3.13"
 dependencies = [
@@ -12,4 +12,10 @@ dependencies = [
     "python-dotenv>=1.2.2",
     "sqlalchemy>=2.0.48",
     "uvicorn[standard]>=0.42.0",
+]
+
+[dependency-groups]
+dev = [
+    "pytest>=9.0.2",
+    "pytest-asyncio>=1.3.0",
 ]
